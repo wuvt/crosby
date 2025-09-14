@@ -2,13 +2,10 @@ import Config
 
 # Configure your database
 config :crosby, Crosby.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "crosby_dev",
+  database: Path.expand("../crosby_dev.db", __DIR__),
+  pool_size: 5,
   stacktrace: true,
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  show_sensitive_data_on_connection_error: true
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -23,7 +20,7 @@ config :crosby, CrosbyWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "C4gTQPcMftbHflOSK6hjiY82t6vXGCtYqaw1kOYJH+2aZop92qMJFvdZZRO64+mq",
+  secret_key_base: "l9Z1WxCjGtEW3Bp/j4HK/q5WIv4AAIJ5DIdtCx+gzZ1AsWvGXmfQPIjvYwxj7eEj",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:crosby, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:crosby, ~w(--watch)]}

@@ -7,7 +7,7 @@ defmodule CrosbyWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_crosby_key",
-    signing_salt: "zIkPBpwT",
+    signing_salt: "9gsxz/5R",
     same_site: "Lax"
   ]
 

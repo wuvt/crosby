@@ -6,18 +6,15 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :crosby, Crosby.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "crosby_test#{System.get_env("MIX_TEST_PARTITION")}",
-  pool: Ecto.Adapters.SQL.Sandbox,
-  pool_size: System.schedulers_online() * 2
+  database: Path.expand("../crosby_test.db", __DIR__),
+  pool_size: 5,
+  pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :crosby, CrosbyWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "8Q7YoT+iIY94qJifPz5ineL0QKfCIYJPJ/DP/fEvjnm7evoPe1V5QpDlmDDsgBZF",
+  secret_key_base: "sK6lOOYlplAvJQeDy2iKCAvHU9fvaCghJcMczBjCw5A3q1d6kKIngf59j+PEaUIC",
   server: false
 
 # In test we don't send emails

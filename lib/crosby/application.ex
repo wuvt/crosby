@@ -10,6 +10,8 @@ defmodule Crosby.Application do
     children = [
       CrosbyWeb.Telemetry,
       Crosby.Repo,
+      {Ecto.Migrator,
+       repos: Application.fetch_env!(:crosby, :ecto_repos), skip: skip_migrations?()},
       {DNSCluster, query: Application.get_env(:crosby, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Crosby.PubSub},
       # Start a worker by calling: Crosby.Worker.start_link(arg)
@@ -30,5 +32,10 @@ defmodule Crosby.Application do
   def config_change(changed, _new, removed) do
     CrosbyWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp skip_migrations?() do
+    # By default, sqlite migrations are run when using a release
+    System.get_env("RELEASE_NAME") == nil
   end
 end

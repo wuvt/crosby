@@ -35,5 +35,7 @@ crosby-*.tar
 npm-debug.log
 /assets/node_modules/
 
-# envrc
-.direnv
+# Database files
+*.db
+*.db-*
+

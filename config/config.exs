@@ -20,7 +20,7 @@ config :crosby, CrosbyWeb.Endpoint,
     layout: false
   ],
   pubsub_server: Crosby.PubSub,
-  live_view: [signing_salt: "GN3gxC47"]
+  live_view: [signing_salt: "3PBNTsfd"]
 
 # Configures the mailer
 #
