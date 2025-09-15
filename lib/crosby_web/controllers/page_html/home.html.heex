@@ -11,7 +11,7 @@
   <%= for category <- @categories do %>
     <li class="w-full flex flex-row justify-between rounded-sm bg-base-200 px-4 py-2">
       <span class="my-auto"><%= category.name %></span>
-      <.button><.icon name="hero-pencil-square"/></.button>
+      <.button navigate={~p"/category/#{category.name}"}><.icon name="hero-pencil-square"/></.button>
     </li>
   <% end %>
   </ul>
