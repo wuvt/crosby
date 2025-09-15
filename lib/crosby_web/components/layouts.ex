@@ -38,7 +38,7 @@ defmodule CrosbyWeb.Layouts do
     <header class="navbar px-4 sm:px-6 lg:px-8">
       <div class="flex-1">
         <a href="/" class="flex-1 flex w-fit items-center gap-4">
-          <img src={~p"/images/logo.svg"} width="144" />
+          <img class="dark:invert" src={~p"/images/logo.svg"} width="144" />
           <span class="text-xl font-semibold my-auto">CROSBY v{Application.spec(:crosby, :vsn)}</span>
         </a>
       </div>
