@@ -19,7 +19,7 @@ defmodule CrosbyWeb.Router do
 
     get "/", PageController, :home
 
-    get "/category/:category", PageController, :category
+    live "/category/:category", CategoryLive
   end
 
   # Other scopes may use custom stacks.
