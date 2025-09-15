@@ -2,7 +2,18 @@
 
   <div class="flex flex-row justify-between">
     <h1 class="text-4xl sm:text-5xl">Playlists</h1>
-    <.button aria-label="Add a new playlist"><.icon name="hero-plus"/></.button>
+    <span class="my-auto"><.button aria-label="Add a new playlist"><.icon name="hero-plus"/></.button></span>
   </div>
+
+  <hr />
+
+  <ul class="space-y-2">
+  <%= for category <- @categories do %>
+    <li class="w-full flex flex-row justify-between rounded-sm bg-base-200 px-4 py-2">
+      <span class="my-auto"><%= category.name %></span>
+      <.button><.icon name="hero-pencil-square"/></.button>
+    </li>
+  <% end %>
+  </ul>
 
 </Layouts.app>

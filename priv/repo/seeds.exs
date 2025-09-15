@@ -9,3 +9,30 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Crosby.Repo
+alias Crosby.Category 
+
+Repo.insert! %Category {
+  name: "psa"
+}
+
+Repo.insert! %Category {
+  name: "ids"
+}
+
+Repo.insert! %Category {
+  name: "lnr"
+}
+
+Repo.insert! %Category {
+  name: "soo"
+}
+
+Repo.insert! %Category {
+  name: "pro"
+}
+
+Repo.insert! %Category {
+  name: "backup"
+}
