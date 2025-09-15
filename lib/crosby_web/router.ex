@@ -18,6 +18,8 @@ defmodule CrosbyWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    get "/category/:category", PageController, :category
   end
 
   # Other scopes may use custom stacks.
