@@ -1,6 +1,7 @@
 import Ecto.Query, only: [from: 2]
 
 defmodule CrosbyWeb.CategoryLive do
+  alias Ecto.Changeset
   use CrosbyWeb, :live_view
   alias Crosby.{Repo, Entry, Category}
 
@@ -40,7 +41,14 @@ defmodule CrosbyWeb.CategoryLive do
       <ul class="space-y-2">
         <%= for entry <- @entries do %>
           <li class="w-full flex flex-row justify-between rounded-sm bg-base-200 px-4 py-2">
-            <span class="my-auto">{entry.path}</span>
+            <input
+              type="text"
+              phx-keyup="update_entry_path"
+              phx-debounce={300}
+              phx-value-entry-id={entry.id}
+              class="my-auto w-full"
+              value={entry.path}
+            />
             <.button
               phx-click="delete_entry"
               phx-value-entry-id={entry.id}
@@ -67,6 +75,15 @@ defmodule CrosbyWeb.CategoryLive do
     entry_id = params |> Map.get("entry-id") |> String.to_integer()
 
     Repo.delete!(%Entry{id: entry_id})
+
+    {:noreply, socket |> update_entries}
+  end
+
+  def handle_event("update_entry_path", params, socket) do
+    entry_id = params |> Map.get("entry-id") |> String.to_integer()
+    path = params |> Map.get("value")
+
+    Repo.get!(Entry, entry_id) |> Changeset.change(%{path: path}) |> Repo.update!()
 
     {:noreply, socket |> update_entries}
   end
