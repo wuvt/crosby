@@ -1,5 +1,3 @@
-import Ecto.Query, only: [from: 2]
-
 defmodule CrosbyWeb.PageController do
   use CrosbyWeb, :controller
 
