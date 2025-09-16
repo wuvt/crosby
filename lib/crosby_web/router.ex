@@ -22,10 +22,11 @@ defmodule CrosbyWeb.Router do
     live "/category/:category", CategoryLive
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", CrosbyWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", CrosbyWeb do
+    pipe_through :api
+
+    get "/category/:category", Api, :category
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:crosby, :dev_routes) do
