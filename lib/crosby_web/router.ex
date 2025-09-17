@@ -17,7 +17,7 @@ defmodule CrosbyWeb.Router do
   scope "/", CrosbyWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", HomeLive
 
     live "/category/:category", CategoryLive
   end
@@ -26,6 +26,8 @@ defmodule CrosbyWeb.Router do
     pipe_through :api
 
     get "/category/:category", Api, :category
+
+    get "/playlists.zip", Api, :playlists
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
