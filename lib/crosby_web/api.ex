@@ -21,18 +21,26 @@ defmodule CrosbyWeb.Api do
   end
 
   def categories do
-    Repo.all(from category in Category, select: category.name)
+    Repo.all(from category in Category, order_by: category.name, select: category.name)
+  end
+
+  def playlist_m3us do
+    categories()
+    |> Enum.map(fn cat -> {String.to_charlist(cat <> ".m3u"), m3u(cat)} end)
+  end
+
+  def playlists_zip do
+    {:ok, {_filename, zip}} = :zip.create(~c"playlists.zip", playlist_m3us(), [:memory])
+    zip
   end
 
   def playlists(conn, _params) do
-    files =
-      categories()
-      |> Task.async_stream(fn cat -> {String.to_charlist(cat <> ".m3u"), m3u(cat)} end)
-      |> Enum.map(fn {:ok, file} -> file end)
-      |> Enum.to_list()
+    conn |> send_download({:binary, playlists_zip()}, filename: "playlists.zip")
+  end
 
-    {:ok, {_filename, zip}} = :zip.create(~c"playlists.zip", files, [:memory])
-
-    conn |> send_download({:binary, zip}, filename: "playlists.zip")
+  def playlists_checksum(conn, _params) do
+    complete = playlist_m3us() |> Enum.map(fn {name, contents} -> "#{name}:\n#{contents}" end)
+    hash = :crypto.hash(:sha256, complete) |> Base.encode64()
+    conn |> text(hash)
   end
 end

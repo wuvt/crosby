@@ -26,6 +26,7 @@ defmodule CrosbyWeb.Router do
     pipe_through :api
 
     get "/playlists.zip", Api, :playlists
+    get "/playlists.zip.chk", Api, :playlists_checksum
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
