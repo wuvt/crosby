@@ -25,8 +25,6 @@ defmodule CrosbyWeb.Router do
   scope "/api", CrosbyWeb do
     pipe_through :api
 
-    get "/category/:category", Api, :category
-
     get "/playlists.zip", Api, :playlists
   end
 
