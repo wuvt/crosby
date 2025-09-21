@@ -42,9 +42,10 @@ defmodule CrosbyWeb.CategoryLive do
         <%= for entry <- @entries do %>
           <li class="w-full flex flex-row justify-between rounded-sm bg-base-200 px-4 py-2">
             <input
+              id={"entry-#{entry.id}"}
               type="text"
               phx-keyup="update_entry_path"
-              phx-debounce={300}
+              phx-debounce={500}
               phx-value-entry-id={entry.id}
               class="my-auto w-full"
               value={entry.path}

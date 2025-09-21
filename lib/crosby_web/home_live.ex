@@ -27,9 +27,10 @@ defmodule CrosbyWeb.HomeLive do
         <%= for category <- @categories do %>
           <li class="w-full flex flex-row justify-between rounded-sm bg-base-200 px-4 py-2">
             <input
+              id={"category-#{category.id}"}
               type="text"
               phx-keyup="update_category_name"
-              phx-debounce={300}
+              phx-debounce={500}
               phx-value-category-id={category.id}
               class="my-auto w-full"
               value={category.name}
