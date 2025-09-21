@@ -41,6 +41,3 @@ npm-debug.log
 
 # direnv
 .direnv
-
-# Release directory
-/rel/
