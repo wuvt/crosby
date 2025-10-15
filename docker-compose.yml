@@ -1,0 +1,11 @@
+services:
+  crosby:
+    build:
+      context: .
+    container_name: crosby
+    restart: always
+    network_mode: host
+    environment:
+      DATABASE_PATH: "/tmp/crosby.db"
+      SECRET_KEY_BASE: "l9Z1WxCjGtEW3Bp/j4HK/q5WIv4AAIJ5DIdtCx+gzZ1AsWvGXmfQPIjvYwxj7eEj"
+      PHX_HOST: "localhost"
