@@ -6,6 +6,6 @@ services:
     restart: always
     network_mode: host
     environment:
-      DATABASE_PATH: "/tmp/crosby.db"
+      DATABASE_PATH: "/data/crosby.db"
       SECRET_KEY_BASE: "l9Z1WxCjGtEW3Bp/j4HK/q5WIv4AAIJ5DIdtCx+gzZ1AsWvGXmfQPIjvYwxj7eEj"
       PHX_HOST: "localhost"
