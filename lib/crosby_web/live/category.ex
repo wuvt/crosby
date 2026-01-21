@@ -53,6 +53,7 @@ defmodule CrosbyWeb.CategoryLive do
             <.button
               phx-click="delete_entry"
               phx-value-entry-id={entry.id}
+              data-confirm={"Are you sure you want to delete \"#{entry.path}\"?"}
             >
               <.icon name="hero-trash" />
             </.button>
