@@ -3,7 +3,7 @@ import Ecto.Query, only: [from: 2]
 defmodule CrosbyWeb.HomeLive do
   alias Ecto.Changeset
   use CrosbyWeb, :live_view
-  alias Crosby.{Repo, Category}
+  alias Crosby.{Repo, Category, Entry}
 
   def mount(_params, _session, socket) do
     {:ok, socket |> update_categories}
@@ -35,9 +35,18 @@ defmodule CrosbyWeb.HomeLive do
               class="my-auto w-full"
               value={category.name}
             />
-            <.button navigate={~p"/category/#{category.name}"}>
-              <.icon name="hero-pencil-square" />
-            </.button>
+            <div class="flex flex-row gap-2">
+              <.button navigate={~p"/category/#{category.name}"}>
+                <.icon name="hero-pencil-square" />
+              </.button>
+              <.button
+                phx-click="delete_category"
+                phx-value-category-id={category.id}
+                data-confirm={"Are you ABSOLUTELY sure you want to delete the \"#{category.name}\" playlist?"}
+              >
+                <.icon name="hero-trash" />
+              </.button>
+            </div>
           </li>
         <% end %>
       </ul>
@@ -49,6 +58,15 @@ defmodule CrosbyWeb.HomeLive do
     # HACK: i mean look at it. maybe change category pages to use ids?
     id = :rand.uniform(2 ** 64)
     Repo.insert!(%Category{name: "changeme-" <> Integer.to_string(id)})
+
+    {:noreply, socket |> update_categories()}
+  end
+
+  def handle_event("delete_category", %{"category-id" => id}, socket) do
+    id = String.to_integer(id)
+
+    from(e in Entry, where: e.category_id == ^id) |> Repo.delete_all()
+    Repo.get!(Category, id) |> Repo.delete!()
 
     {:noreply, socket |> update_categories()}
   end
